@@ -86,4 +86,45 @@ def prob_3():
     cv2.imwrite(dir_save, img_veg)
     return
 
-prob_3()
+def prob_4(): 
+    # a 
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    dir_dog = dir_path + "/output/" + "ps0-1-a-1.png"
+    img_dog = cv2.imread(dir_dog, 1)
+    img_dog = img_dog[:,:,1]
+    img_green1 = img_dog.copy()
+    max_pix = np.amax(img_dog)
+    min_pix = np.amin(img_dog)
+    mean_pix = np.mean(img_dog)
+    std_pix = np.std(img_dog)
+
+    # b 
+    img = ((img_dog - mean_pix)/std_pix)*10
+    dir_save = dir_path + "/output/" + "ps0-4-b-1.png"
+    cv2.imshow('problem 4b', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
+    cv2.imwrite(dir_save, img)
+
+    # c 
+    dir_save = dir_path + "/output/" + "ps0-4-c-1.png"
+    rows, col = img_green1.shape
+    M = np.float32([[1, 0, -2], [0, 1, 0]])
+    dst = cv2.warpAffine(img_green1, M, (col, rows))
+    cv2.imshow('problem 4c', dst)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
+    cv2.imwrite(dir_save, dst)
+
+    #d 
+    diff = img_green1 - dst 
+    print(diff)
+    dir_save = dir_path + "/output/" + "ps0-4-d-1.png"
+    cv2.imshow('problem 4d', diff)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
+
+
+    return 
+
+prob_4()
