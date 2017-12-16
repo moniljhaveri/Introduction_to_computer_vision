@@ -118,13 +118,47 @@ def prob_4():
 
     #d 
     diff = img_green1 - dst 
-    print(diff)
+    print(dst)
     dir_save = dir_path + "/output/" + "ps0-4-d-1.png"
     cv2.imshow('problem 4d', diff)
     cv2.waitKey(0)
     cv2.destroyAllWindows() 
-
-
     return 
 
-prob_4()
+def prob_5(): 
+    # a 
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    dir_dog = dir_path + "/output/" + "ps0-1-a-1.png"
+    img_dog = cv2.imread(dir_dog, 1)
+    row, col, _ = img_dog.shape
+    im = np.empty((row, col), np.uint8)
+
+    mean = 0
+    stddev = 16 
+    cv2.randn(im, mean, stddev)
+    img_dog[:,:,1] += im
+    cv2.imshow('problem 5a', img_dog)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
+    dir_save = dir_path + "/output/" + "ps0-5-a-1.png"
+    cv2.imwrite(dir_save, img_dog)
+
+    # b 
+    img_dog = cv2.imread(dir_dog, 1)
+    row, col, _ = img_dog.shape
+    im = np.empty((row, col), np.uint8)
+
+    mean = 0
+    stddev = 16 
+    cv2.randn(im, mean, stddev)
+    img_dog[:,:,0] += im
+    cv2.imshow('problem 5b', img_dog)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows() 
+    dir_save = dir_path + "/output/" + "ps0-5-b-1.png"
+    cv2.imwrite(dir_save, img_dog)
+
+
+
+
+prob_5()
