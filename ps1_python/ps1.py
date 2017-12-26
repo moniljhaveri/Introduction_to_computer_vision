@@ -25,11 +25,7 @@ def problem2(edges, theta_bin, d_bin):
                 for j in range(width) if edges[i, j]]
 
     for i, j in edge_arr:
-<<<<<<< HEAD
         theta = np.arctan2(j, i)
-=======
-        theta = np.arctan2(i, j)
->>>>>>> master
         theta_ang = math.floor(theta * (180 / np.pi))
         p = math.floor(i * np.sin(theta) + j * np.cos(theta))
         hought_arr[p, theta_ang] += 1
