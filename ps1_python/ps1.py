@@ -3,6 +3,8 @@ import numpy as np
 import os
 import math
 from PIL import Image
+from hough_lib import hough_peaks
+from hough_lib import hough_arr
 
 
 def problem1(dir_path):
@@ -14,35 +16,10 @@ def problem1(dir_path):
     return edges
 
 
-def problem2(edges, theta_bin, rho_bin):
-    # part a
-    if len(edges.shape) == 2:
-        height, width = edges.shape
-    else:
-        height, width, _ = edges.shape
-
-    theta_samples = int(180 / theta_bin)
-
-    theta_list = np.linspace(-90.0, 90.0, num=theta_samples)
-
-    rho_max = math.ceil(((height**2) + (width**2))**(1 / 2))
-    rho_samples = int(rho_max / rho_bin)
-    rho_list = np.linspace(0, rho_max, num=rho_samples)
-    hought_arr = np.zeros((len(rho_list), len(theta_list)))
-    edge_arr = np.nonzero(edges)
-    for i, j in zip(*edge_arr):
-        for theta_idx, theta in enumerate(theta_list):
-            rho = i * np.cos(np.deg2rad(theta)) + j * np.sin(np.deg2rad(theta))
-            rho_idx = int(round(rho / rho_bin))
-            hought_arr[rho_idx][theta_idx] += 1
-
-    img = Image.fromarray(hought_arr)
-    img.show()
-    return hought_arr
-
-
 dir_path = os.path.dirname(os.path.abspath(
     __file__)) + '/' + 'ps1_octave_template'
 
 edges = problem1(dir_path)
-hought_arr = problem2(edges, 1, 1)
+hough_array = hough_arr(edges, 10, 1)
+
+hough_peaks(hough_array, 1)
