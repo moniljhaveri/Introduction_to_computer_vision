@@ -30,4 +30,16 @@ def hough_arr(edges, theta_bin, rho_bin):
 
 
 def hough_peaks(H, num_peaks):
-    pass
+    if len(H.shape) != 2:
+        return
+    row, col = H.shape
+    flat_arr = H.flatten()
+    arg_arr = np.argsort(flat_arr)[-1 * num_peaks::]
+    rc_arr = []
+    for i in arg_arr:
+        r = (int)(round((i / col)))
+
+        c = i % col
+        rc_arr.append((r, c))
+
+    return rc_arr

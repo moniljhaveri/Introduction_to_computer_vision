@@ -22,4 +22,5 @@ dir_path = os.path.dirname(os.path.abspath(
 edges = problem1(dir_path)
 hough_array = hough_arr(edges, 10, 1)
 
-hough_peaks(hough_array, 1)
+hough_peak_arr = hough_peaks(hough_array, 10)
+print(hough_peak_arr)
